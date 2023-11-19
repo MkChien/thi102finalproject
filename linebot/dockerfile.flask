@@ -1,0 +1,19 @@
+# 使用官方Python映像檔作為基底映像檔
+FROM python:3.8
+
+#設定工作目錄
+WORKDIR /app
+
+# 複製Flask應用程式的程式碼到容器中
+COPY . /app/
+
+# RUN apk add --no-cache gcc libc-dev linux-headers
+#安裝依賴
+RUN pip install --upgrade pip
+# RUN pip install uwsgi
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+#啟動Flask應用程式 
+CMD [ "uwsgi", "uwsgi.ini" ]
+

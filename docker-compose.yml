@@ -1,0 +1,63 @@
+# version: '3'
+
+# services:
+#   flask-app:
+#     build:
+#       context: ./linebot
+#     container_name: linebot
+#     restart: always
+#     expose:
+#       - 3000 #容器內部暴露端口
+
+#   nginx-server:
+#     build: 
+#       context: ./nginxfile
+#     container_name: nginx
+#     restart: always
+#     ports:
+#       - "80:80"
+    
+#   ngrok:
+#     image: wernight/ngrok:latest
+#     depends_on:
+#       - nginx
+#     ports:
+#       - "4040:4040"
+#     environment:
+#       NGROK_PROTOCOL: tcp
+#       NGROK_PORT: nginx:80
+#       NGROK_AUTH: 2Vbw5OF5sw6iC0O01BNK0Ds0oIU_3EbrnNrs12JRxtdRPaFXo
+
+version: "3.8"
+
+services:
+
+  flask:
+    build:
+      context: ./linebot
+      dockerfile: dockerfile.flask
+    container_name: linebot
+    restart: always
+    environment:
+      - APP_NAME=MyFlaskApp
+    expose:
+      - 8080
+
+  nginx:
+    build:
+      context: ./nginxfile
+      dockerfile: dockerfile.nginx
+    container_name: nginx
+    restart: always
+    ports: 
+      - "80:80"
+  ngrok:
+    image: wernight/ngrok:latest
+    depends_on:
+      - nginx
+    ports:
+      - "4040:4040"
+    environment:
+      NGROK_PROTOCOL: tcp
+      NGROK_PORT: nginx:80
+      NGROK_AUTH: 2Vbw5OF5sw6iC0O01BNK0Ds0oIU_3EbrnNrs12JRxtdRPaFXo
