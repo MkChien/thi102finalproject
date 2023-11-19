@@ -1,1 +1,1 @@
-# thi102finalproject
+"This is a set of review filtering Linebot program for Google reviews. Many restaurants on the market launch campaigns offering free dishes for positive reviews in order to boost their online ratings. We filter out these reviews that are not genuinely recommended by consumers, and instead focus on scoring based on real opinions. We hope you'll like the program we've created."
